@@ -9,7 +9,7 @@ CREATE TABLE products (
   id INT unsigned NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
   type VARCHAR(50) NOT NULL,
-  GENDER VARCHAR(1),
+  gender VARCHAR(1),
   PRIMARY KEY (id)
 );
 

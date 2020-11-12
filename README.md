@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/recreationalengineeringinc/reviews
+  - https://github.com/recreationalengineeringinc/cart
+  - https://github.com/recreationalengineeringinc/carousel
+  - https://github.com/recreationalengineeringinc/image-display
 
 ## Table of Contents
 

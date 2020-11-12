@@ -21,10 +21,11 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
+/* can i have mysql say if this will exist for certain */
 CREATE TABLE reviews (
   id INT unsigned NOT NULL AUTO_INCREMENT,
-  product_id INT NOT NULL,
-  user_id INT NOT NULL,
+  product_id INT unsigned NOT NULL,
+  user_id INT unsigned NOT NULL,
   rating TINYINT NOT NULL,
   title VARCHAR(50) NOT NULL,
   text TEXT(10000) NOT NULL,
@@ -43,8 +44,9 @@ CREATE TABLE reviews (
   warmth_rating TINYINT,
   body_type VARCHAR(15),
   PRIMARY KEY (id),
-  FOREIGN KEY (product_id)
-      REFERENCES products(id),
-  FOREIGN KEY (user_id)
-      REFERENCES users(id)
+
+  FOREIGN KEY (product_id) REFERENCES products (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES users(id)
+      ON UPDATE CASCADE ON DELETE CASCADE
 );

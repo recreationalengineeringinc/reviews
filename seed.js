@@ -15,13 +15,15 @@ const makeUsers = (amount) => {
   let name;
   let email;
   let location;
+  let totalReviews;
   let insert;
 
   for (let i = 1; i <= amount; i += 1) {
     name = faker.internet.userName();
     email = faker.internet.email();
     location = faker.fake('{{address.city}}, {{address.stateAbbr}}');
-    insert = query.generateUser(i, name, email, location);
+    totalReviews = random(100) + 1;
+    insert = query.generateUser(i, name, email, location, totalReviews);
     db.connection.query(insert);
   }
 };

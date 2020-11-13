@@ -21,6 +21,7 @@ CREATE TABLE users (
   name VARCHAR(25) NOT NULL,
   email VARCHAR(255) NOT NULL,
   location VARCHAR(50),
+  totalreviews INT,
   PRIMARY KEY (id)
 );
 

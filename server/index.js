@@ -7,7 +7,7 @@ const app = express();
 const port = 3004;
 const publicDir = path.join(__dirname, '../public/');
 
-app.use(express.static(publicDir));
+app.use('/product/:id', express.static(publicDir));
 
 app.get('/product/:id/reviews', (req, res) => {
   db.connection.query(
@@ -24,15 +24,15 @@ app.get('/product/:id/reviews', (req, res) => {
   );
 });
 
-app.get('/api/users', (req, res) => {
-  db.connection.query('SELECT reviews.id FROM reviews', (err, result) => {
-    if (err) {
-      res.sendStatus(404);
-    } else {
-      res.status(200).json(result);
-    }
-  });
-});
+// app.get('/api/users', (req, res) => {
+//   db.connection.query('SELECT reviews.id FROM reviews', (err, result) => {
+//     if (err) {
+//       res.sendStatus(404);
+//     } else {
+//       res.status(200).json(result);
+//     }
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

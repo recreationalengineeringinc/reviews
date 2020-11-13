@@ -46,6 +46,7 @@ const makeProducts = (amount) => {
   let insert;
   const reviews = [1, 10, 20, 50, 100, 200, 500, 1000];
 
+  // Hard-coding reviews for set products defined as group.
   makeReviews(random(reviews[random(reviews.length)]), 1, 'clothing', 'F', 100);
   makeReviews(random(reviews[random(reviews.length)]), 2, 'clothing', 'M', 100);
   makeReviews(random(reviews[random(reviews.length)]), 3, 'tent', null, 100);

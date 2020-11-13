@@ -1,12 +1,16 @@
 import React from 'react';
 
-class App extends React.Component {
+class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      reviews: []
     };
   }
+
+  componentDidMount() {
+
+  };
 
   render() {
     return (
@@ -17,4 +21,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Reviews;

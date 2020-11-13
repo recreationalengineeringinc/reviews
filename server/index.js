@@ -5,7 +5,7 @@ const db = require('../db/connection.js');
 const app = express();
 const port = 3004;
 
-app.get('/api/item/:id/reviews', (req, res) => {
+app.get('/product/:id/reviews', (req, res) => {
   db.connection.query(
     `SELECT reviews.*, products.*, users.name as username, users.location, users.totalreviews FROM reviews
     INNER JOIN products ON reviews.product_id=${req.params.id} AND reviews.product_id=products.id
@@ -20,7 +20,7 @@ app.get('/api/item/:id/reviews', (req, res) => {
   );
 });
 
-app.get('/api/users', (req, res) => {
+app.get('/users', (req, res) => {
   db.connection.query('SELECT reviews.id FROM reviews', (err, result) => {
     if (err) {
       res.sendStatus(404);

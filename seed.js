@@ -41,7 +41,13 @@ const makeProducts = (amount) => {
   let productGender;
   let photo;
   let insert;
-  const reviews = [1, 50, 100, 200, 500];
+  const reviews = [1, 10, 20, 50, 100, 200, 500, 1000];
+
+  makeReviews(random(reviews[random(reviews.length)]), 1, 'clothing', 'F', 100);
+  makeReviews(random(reviews[random(reviews.length)]), 2, 'clothing', 'M', 100);
+  makeReviews(random(reviews[random(reviews.length)]), 3, 'tent', null, 100);
+  makeReviews(random(reviews[random(reviews.length)]), 4, 'tent', null, 100);
+  makeReviews(random(reviews[random(reviews.length)]), 5, 'shoe', 'M', 100);
 
   for (let i = 6; i <= amount + 5; i += 1) {
     company = faker.company.companyName();
@@ -54,7 +60,7 @@ const makeProducts = (amount) => {
       if (err) {
         console.log(err);
       } else {
-        makeReviews(random(reviews[random(5)]), i, type, productGender, 100);
+        makeReviews(random(reviews[random(reviews.length)]), i, type, productGender, 100);
       }
     });
   }

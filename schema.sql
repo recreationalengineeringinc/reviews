@@ -2,14 +2,17 @@
     mysql -u root -p < schema.sql
     to create db and tables.      */
 
-CREATE DATABASE IF NOT EXISTS rei;
+DROP DATABASE IF EXISTS rei;
+CREATE DATABASE rei;
 USE rei;
 
 CREATE TABLE products (
   id INT unsigned NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50) NOT NULL,
-  type VARCHAR(50) NOT NULL,
+  company VARCHAR(50) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  type VARCHAR(10) NOT NULL,
   gender VARCHAR(1),
+  photo VARCHAR(255),
   PRIMARY KEY (id)
 );
 
@@ -50,3 +53,15 @@ CREATE TABLE reviews (
   FOREIGN KEY (user_id) REFERENCES users(id)
       ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+-- 5 Hardcoded Products
+INSERT INTO products (id, company, name, type, gender, photo)
+  VALUES (1, "Arc'teryx", "Women's Andessa Down Jacket", "clothing", "F", "https://s3-us-west-1.amazonaws.com/rei.review.photos/1.jpeg");
+INSERT INTO products (id, company, name, type, gender, photo)
+  VALUES (2, "Patagonia", "Nano Puff Insulated Hoodie - Men's", "clothing", "M", "https://s3-us-west-1.amazonaws.com/rei.review.photos/2.jpeg");
+INSERT INTO products (id, company, name, type, gender, photo)
+  VALUES (3, "Outdoor Research", "Bug Bivy", "tent", null, "https://s3-us-west-1.amazonaws.com/rei.review.photos/3.jpeg");
+INSERT INTO products (id, company, name, type, gender, photo)
+  VALUES (4, "REI Co-op", "Kingdom 6 Tent", "tent", null, "https://s3-us-west-1.amazonaws.com/rei.review.photos/4.jpeg");
+INSERT INTO products (id, company, name, type, gender, photo)
+  VALUES (5, "Black Diamond", "Momentum Climbing Shoes - Ash - Men's", "shoes", "M", "https://s3-us-west-1.amazonaws.com/rei.review.photos/5.jpeg");

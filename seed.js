@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-loop-func */
 const faker = require('faker');
 

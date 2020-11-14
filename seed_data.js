@@ -9,7 +9,7 @@ const generateProduct = (id, company, name, type, gender, photo) => {
 };
 
 const generateUser = (id, name, email, location, totalReviews) => {
-  const query = `INSERT INTO users (id, name, email, location, totalReviews)
+  const query = `INSERT INTO users (id, name, email, location, total_reviews)
   VALUES (${id}, "${name}", "${email}", ${location ? `"${location}"` : null}, ${totalReviews});`;
 
   return query;

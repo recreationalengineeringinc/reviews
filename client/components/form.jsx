@@ -1,6 +1,7 @@
 import React from 'react';
 
 class Form extends React.Component {
+  display.name = 'Form';
   constructor(props) {
     super(props);
     this.state = {

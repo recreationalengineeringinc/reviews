@@ -51,7 +51,7 @@ const makeProducts = (amount) => {
   makeReviews(random(reviews[random(reviews.length)]), 2, 'clothing', 'M', 100);
   makeReviews(random(reviews[random(reviews.length)]), 3, 'tent', null, 100);
   makeReviews(random(reviews[random(reviews.length)]), 4, 'tent', null, 100);
-  makeReviews(random(reviews[random(reviews.length)]), 5, 'shoe', 'M', 100);
+  makeReviews(random(reviews[random(reviews.length)]), 5, 'shoes', 'M', 100);
 
   for (let i = 6; i <= amount + 5; i += 1) {
     company = faker.company.companyName();
@@ -60,13 +60,8 @@ const makeProducts = (amount) => {
     productGender = (type === 'tent') ? null : gender[random(2)];
     photo = faker.image.imageUrl(null, null, 'people', true);
     insert = query.generateProduct(i, company, name, type, productGender, photo);
-    db.connection.query(insert, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        makeReviews(random(reviews[random(reviews.length)]), i, type, productGender, 100);
-      }
-    });
+    db.connection.query(insert);
+    makeReviews(random(reviews[random(reviews.length)]), i, type, productGender, 100);
   }
 };
 

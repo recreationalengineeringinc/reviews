@@ -36,6 +36,7 @@ CREATE TABLE reviews (
   recommended BOOLEAN,
   age VARCHAR(15),
   best_for VARCHAR(255),
+  review_time INT,
   experience_level VARCHAR(15),
   typical_shoe_size VARCHAR(15),
   height VARCHAR(20),

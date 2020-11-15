@@ -28,6 +28,9 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
   recommended = recommended[random(recommended.length)];
   let age = ['Under 18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 74', '75 or over'];
   const review_time = random(1000) + 1;
+  const helpful_yes = random(100);
+  let helpful_no = [0, 15];
+  helpful_no = random(helpful_no[random(2)]);
   // Initializing data even if null or else query will not generate.
   let best_for;
   let experience_level;
@@ -102,7 +105,7 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
       weight_range = weight_range[random(weight_range.length)];
     }
   }
-  const query = `INSERT INTO reviews (product_id, user_id, rating, title, text, recommended, age, best_for, review_time, experience_level, typical_shoe_size, height, weight_range, ease_of_use_rating, ease_of_assembly_rating, width_rating, product_weight_rating, overall_fit_rating, warmth_rating, body_type)
+  const query = `INSERT INTO reviews (product_id, user_id, rating, title, text, recommended, helpful_yes, helpful_no, age, best_for, review_time, experience_level, typical_shoe_size, height, weight_range, ease_of_use_rating, ease_of_assembly_rating, width_rating, product_weight_rating, overall_fit_rating, warmth_rating, body_type)
   VALUES (
     ${product_id},
     ${user_id},
@@ -110,6 +113,8 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
     "${title}",
     "${text}",
     ${recommended},
+    ${helpful_yes},
+    ${helpful_no},
     ${typeof age === 'string' ? `"${age}"` : null},
     ${best_for ? `"${best_for}"` : null},
     ${review_time},

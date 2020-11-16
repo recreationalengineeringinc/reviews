@@ -13,7 +13,7 @@ module.exports = {
     },
     ecmaVersion: 2018,
     sourceType: 'module',
-    import/extentions: ['error', 'always', { ignorePackages: true }],
+    extentions: ['error', 'always', { ignorePackages: true }],
   },
   plugins: [
     'react',

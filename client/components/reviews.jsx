@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import axios from 'axios';
-import RatingSnapshot from './reviews/ratingSnapshot.jsx';
+import RatingSnapshot from './reviews/ratingSnapshot';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -24,8 +26,8 @@ class Reviews extends React.Component {
 
   componentDidMount() {
     axios.get(`${window.location.pathname}reviews`)
-      .then((result) => {
-        result = result.data;
+      .then((results) => {
+        const result = results.data;
         const reviews = [];
         const review = {};
         // Parsing Data in front end.
@@ -84,7 +86,7 @@ class Reviews extends React.Component {
           reviews.push(review);
         }
         this.state.reviews = reviews;
-        this.setState({renderedReviews: this.state.reviews.slice(0, 12)});
+        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, 12) }));
       });
   }
 
@@ -111,7 +113,7 @@ class Reviews extends React.Component {
         <div>
           <button id="writeReview" type="button">Write a review</button>
         </div>
-        <RatingSnapshot reviewsCount={this.state.reviewsCount} />
+        <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={this.state.overall.rating.count} />
       </div>
     );
   }

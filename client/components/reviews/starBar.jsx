@@ -7,7 +7,7 @@ const StarBar = (props) => {
   return (
     <div id={`${5 - props.i}stars`} className="barContainer">
       <div className="histogram-star">
-        {5 - props.i}
+        <span className="star-text">{5 - props.i}</span>
         ★
       </div>
       <div className="bar">

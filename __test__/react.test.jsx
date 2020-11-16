@@ -1,21 +1,29 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import { mount, shallow, render } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import Reviews from '../client/components/reviews';
 
 describe('<Reviews /> to have text.', () => {
   it('Reviews has text.', () => {
-    const wrapper = mount(<Reviews />);
+    const wrapper = shallow(<Reviews />);
 
     expect(wrapper.find('h2')).toIncludeText('Reviews');
   });
 });
 
-describe('<Reviews /> to have company in state.', () => {
-  it('Reviews state has product.', () => {
-    const wrapper = render(<Reviews />);
-
-    expect(wrapper.state('product')).toHaveProperty('company');
+describe('<RatingSnapshot /> to calculate correct %.', () => {
+  it('Reviews state to have property.', () => {
+    const wrapper = mount(<Reviews />);
+    wrapper.setState({
+      reviewsCount: {
+        1: 10,
+        2: 5,
+        3: 15,
+        4: 20,
+        5: 50,
+      },
+    });
+    expect(wrapper.state('reviewsCount')).toHaveProperty('1');
   });
 });

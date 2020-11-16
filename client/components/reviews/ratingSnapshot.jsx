@@ -13,17 +13,17 @@ const RatingSnapshot = ({ reviewsCount, totalReviews }) => {
   }
 
   return (
-    <table>
-      <th className="histogram-header">
+    <div>
+      <div className="histogram-header">
         <h4>Rating Snapshot</h4>
         <p>Select a row below to filter reviews.</p>
-      </th>
-      <tb className="histogram-container">
+      </div>
+      <div className="histogram-container">
         {counts.map((count, i) =>
           <StarBar key={i} count={count} i={i} totalReviews={totalReviews} />,
         )}
-      </tb>
-    </table>
+      </div>
+    </div>
   );
 };
 

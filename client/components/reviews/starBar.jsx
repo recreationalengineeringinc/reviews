@@ -5,16 +5,16 @@ import React from 'react';
 const StarBar = (props) => {
   const percentage = (props.count / props.totalReviews) * 100;
   return (
-    <tr id={`${5 - props.i}stars`} className="barContainer">
-      <td className="histogram-star">
+    <div id={`${5 - props.i}stars`} className="barContainer">
+      <div className="histogram-star">
         {5 - props.i}
         ★
-      </td>
-      <td className="bar">
-        <div className="percentageReview" style={{ width: `${percentage}%` }} />
-      </td>
-      <td className="starCount" style={{ display: 'inline-block' }}>{props.count}</td>
-    </tr>
+      </div>
+      <div className="bar">
+        <span className="percentageReview" style={{ width: `${percentage}%` }} />
+      </div>
+      <div className="starCount" style={{ display: 'inline-block' }}>{props.count}</div>
+    </div>
   );
 };
 

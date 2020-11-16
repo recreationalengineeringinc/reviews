@@ -8,7 +8,7 @@ const StarBar = (props) => {
     <div id={`${5 - props.i}stars`} className="barContainer">
       <div className="histogram-star">
         <span className="star-text">{5 - props.i}</span>
-        ★
+        <span className="star">★</span>
       </div>
       <div className="bar">
         <span className="percentageReview" style={{ width: `${percentage}%` }} />

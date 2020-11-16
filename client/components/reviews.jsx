@@ -90,6 +90,7 @@ class Reviews extends React.Component {
       });
   }
 
+  // 1 - 12, 42 +30...
   increase(prop, num) {
     const { overall } = this.state;
     const { reviewsCount } = this.state;

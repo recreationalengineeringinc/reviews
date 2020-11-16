@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
 const mysql = require('mysql');
+const user = require('./userInfo.js');
 
-const connection = mysql.createConnection({
-  user: 'root',
-  password: 'pass',
-  database: 'rei',
-});
+const profile = Object.assign(user, { database: 'rei' });
+const connection = mysql.createConnection(profile);
 
 connection.connect((err) => {
   if (err) {

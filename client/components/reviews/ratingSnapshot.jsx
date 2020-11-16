@@ -5,6 +5,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import StarBar from './starBar';
+import './ratingSnapshot.css';
 
 const RatingSnapshot = ({ reviewsCount, totalReviews }) => {
   const counts = [];

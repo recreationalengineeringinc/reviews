@@ -21,7 +21,7 @@ const random = (num, skew = 1) => (
 
 const generateReview = (product_id, product_type, gender, userAmount) => {
   const user_id = random(userAmount) + 1;
-  const rating = random(5, 0.5) + 1;
+  const rating = random(5, 0.4) + 1;
   const title = faker.lorem.words(random(4) + 1);
   const text = faker.lorem.sentences(random(15) + 1) + faker.lorem.paragraphs(random(1));
   let recommended = [null, true, false];

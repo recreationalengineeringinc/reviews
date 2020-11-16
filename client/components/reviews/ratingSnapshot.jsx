@@ -5,7 +5,7 @@ const RatingSnapshot = (props) => {
   return (
     <div>
       <div class="histogram-header">
-        <h4>Rating Snapshot</h4><br />
+        <h4>Rating Snapshot</h4>
         <p>Select a row below to filter reviews.</p>
       </div>
       <div id="5stars">5 <span id="star">★</span> ... bar ... {props.reviewsCount[5]}</div>

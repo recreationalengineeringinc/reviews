@@ -20,6 +20,23 @@
 
 div {
   font-family: Graphik, serif;
+  color: rgb(36, 36, 36)
+}
+
+#reviewsHeader {
+  font-weight: 420;
+  font-size: 22px;
+  font-family: Stuart, serif;
+}
+
+#writeReview {
+  font-size: 15px;
+  font-weight: 530;
+  padding: 10px 12px;
+  border: 1px solid #446e91;
+  border-radius: 2px;
+  background-color:	#446e91;
+  color: #fdfdfe;
 }
 
 h4 {

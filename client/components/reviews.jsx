@@ -107,7 +107,7 @@ class Reviews extends React.Component {
   render() {
     return (
       <div>
-        <h2>Reviews</h2>
+        <h2 id="reviewsHeader">Reviews</h2>
         <div>
           <button id="writeReview" type="button">Write a review</button>
         </div>

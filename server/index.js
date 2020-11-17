@@ -13,7 +13,8 @@ app.get('/product/:id/reviews', (req, res) => {
   db.connection.query(
     `SELECT products.*, reviews.*, users.name as username, users.location, users.total_reviews FROM reviews
     INNER JOIN products ON reviews.product_id=${req.params.id} AND reviews.product_id=products.id
-    INNER JOIN users ON users.id=reviews.user_id`, (err, result) => {
+    INNER JOIN users ON users.id=reviews.user_id
+    ORDER BY reviews.review_time`, (err, result) => {
       if (err) {
         res.sendStatus(404);
       } else {

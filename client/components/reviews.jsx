@@ -3,6 +3,7 @@
 import React from 'react';
 import axios from 'axios';
 import RatingSnapshot from './reviews/ratingSnapshot';
+import ReviewsList from './reviews/reviewsList';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -29,9 +30,9 @@ class Reviews extends React.Component {
       .then((results) => {
         const result = results.data;
         const reviews = [];
-        const review = {};
         // Parsing Data in front end.
         for (let i = 0; i < result.length; i += 1) {
+          const review = {};
           if (i === 0) {
             this.state.product = {
               company: result[i].company,
@@ -108,13 +109,16 @@ class Reviews extends React.Component {
   }
 
   render() {
+    const totalReviews = this.state.overall.rating.count;
+
     return (
       <div>
         <h2 id="reviewsHeader">Reviews</h2>
         <div>
           <button id="writeReview" type="button">Write a review</button>
         </div>
-        <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={this.state.overall.rating.count} />
+        <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+        <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} />
       </div>
     );
   }

@@ -9,7 +9,7 @@ import React from 'react';
 import ReviewOptionalText from './reviewOptionalText';
 import ReviewOptionalRating from './reviewOptionalRating';
 
-const ReviewComment = ({ comment }) => {
+const ReviewComment = ({ comment, handleClick }) => {
   let recommended;
   if (comment.recommended) {
     recommended = (
@@ -44,6 +44,30 @@ const ReviewComment = ({ comment }) => {
     }
   }
 
+  let helpful;
+  if (comment.helpful.clicked) {
+    helpful = (
+      <div className="helpfulClicked">
+        <div id="yes">Yes · <span style={{ color: 'green' }}>{comment.helpful.yes}</span></div>
+        <div id="no">No · <span style={{ color: 'red' }}>{comment.helpful.no}</span></div>
+      </div>
+    );
+  } else {
+    helpful = (
+      <div className="helpfulButtons">
+        <button id="yes" onClick={(e) => handleClick(e, comment)}>Yes·{comment.helpful.yes}</button>
+        <button id="no" onClick={(e) => handleClick(e, comment)}>No·{comment.helpful.no}</button>
+      </div>
+    );
+  }
+
+  let reported;
+  if (comment.reported) {
+    reported = <span id="report">Reported</span>;
+  } else {
+    reported = <button id="report" onClick={(e) => handleClick(e, comment)}>Report as inappropriate</button>;
+  }
+
   return (
     <div className="comment-container">
       <div className="user-container">
@@ -71,9 +95,8 @@ const ReviewComment = ({ comment }) => {
         {recommended}
         <div className="helpful">
           <span>Helpful?</span>
-          <button id="yes">Yes·{comment.helpful.yes}</button>
-          <button id="no">No·{comment.helpful.no}</button>
-          <button id="report">Report as inappropriate</button>
+          {helpful}
+          {reported}
         </div>
       </div>
       <div className="optional-rating-container">

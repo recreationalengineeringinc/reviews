@@ -7,12 +7,14 @@ import React from 'react';
 import ReviewComment from './reviewComment';
 import './reviewsList.css';
 
-const ReviewsList = ({ reviews, totalReviews }) => (
+const ReviewsList = ({ reviews, totalReviews, handleClick }) => (
   <div className="reviewsList-container">
-    <div>1–{reviews.length} of {totalReviews} Reviews</div>
-    <div>Sort by:</div>
+    <div className="reviewsList-header">
+      <div>1–{reviews.length} of {totalReviews} Reviews</div>
+      <div>Sort by:</div>
+    </div>
     {reviews.map((comment, i) =>
-      <ReviewComment key={i} comment={comment} />,
+      <ReviewComment key={i} comment={comment} handleClick={handleClick} />,
     )}
   </div>
 );

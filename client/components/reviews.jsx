@@ -22,7 +22,10 @@ class Reviews extends React.Component {
         overallFit: { total: 0, count: 0 },
         warmth: { total: 0, count: 0 },
       },
+      renderLength: 12,
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +51,7 @@ class Reviews extends React.Component {
           review.user.location = result[i].location;
           review.user.username = result[i].username;
           // Review Info
+          review.id = result[i].id;
           review.rating = result[i].rating;
           review.time = result[i].review_time;
           review.title = result[i].title;
@@ -87,8 +91,29 @@ class Reviews extends React.Component {
           reviews.push(review);
         }
         this.state.reviews = reviews;
-        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, 12) }));
+        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
       });
+  }
+
+  handleClick(e, comment = {}) {
+    e.preventDefault();
+    const target = e.target.id;
+    const { reviews } = this.state;
+    if (target === 'yes' || target === 'no' || target === 'report') {
+      for (let i = 0; i < reviews.length; i += 1) {
+        if (reviews[i].id === comment.id) {
+          if (target === 'report') {
+            reviews[i].reported = true;
+            break;
+          } else {
+            reviews[i].helpful[target] += 1;
+            reviews[i].helpful.clicked = true;
+            break;
+          }
+        }
+      }
+      setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
+    }
   }
 
   // 1 - 12, 42 +30...
@@ -115,10 +140,10 @@ class Reviews extends React.Component {
       <div>
         <h2 id="reviewsHeader">Reviews</h2>
         <div>
-          <button id="writeReview" type="button">Write a review</button>
+          <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
         </div>
         <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
-        <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} />
+        <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
       </div>
     );
   }

@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 const mysql = require('mysql');
+const user = require('./userInfo.js');
 
-module.exports.connection = mysql.createConnection({
-  user: 'root',
-  password: 'pass',
-  database: 'rei',
-});
+const profile = Object.assign(user, { database: 'rei' });
+const connection = mysql.createConnection(profile);
 
-module.exports.connection.connect((err) => {
+connection.connect((err) => {
   if (err) {
     console.log('Error connecting: ', err);
   } else {
     console.log('Connected!');
   }
 });
+
+module.exports.connection = connection;

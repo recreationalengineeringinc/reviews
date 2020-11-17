@@ -21,7 +21,7 @@ CREATE TABLE users (
   name VARCHAR(25) NOT NULL,
   email VARCHAR(255) NOT NULL,
   location VARCHAR(50),
-  totalreviews INT,
+  total_reviews INT,
   PRIMARY KEY (id)
 );
 
@@ -34,8 +34,13 @@ CREATE TABLE reviews (
   title VARCHAR(50) NOT NULL,
   text TEXT(10000) NOT NULL,
   recommended BOOLEAN,
+  helpful_yes INT,
+  helpful_no INT,
+  reported BOOLEAN DEFAULT 0,
+  helpful_clicked BOOLEAN DEFAULT 0,
   age VARCHAR(15),
   best_for VARCHAR(255),
+  review_time INT,
   experience_level VARCHAR(15),
   typical_shoe_size VARCHAR(15),
   height VARCHAR(20),

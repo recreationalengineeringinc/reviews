@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app.jsx';
+import Reviews from './components/reviews';
+import './index.css';
 
-ReactDOM.render();
+ReactDOM.render(<Reviews />, document.getElementById('reviews'));

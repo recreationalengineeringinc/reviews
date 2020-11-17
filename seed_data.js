@@ -9,26 +9,28 @@ const generateProduct = (id, company, name, type, gender, photo) => {
 };
 
 const generateUser = (id, name, email, location, totalReviews) => {
-  const query = `INSERT INTO users (id, name, email, location, totalReviews)
+  const query = `INSERT INTO users (id, name, email, location, total_reviews)
   VALUES (${id}, "${name}", "${email}", ${location ? `"${location}"` : null}, ${totalReviews});`;
 
   return query;
 };
 
-const random = (num) => (
-  Math.floor(Math.random() * num)
+const random = (num, skew = 1) => (
+  Math.floor(Math.random() ** skew * num)
 );
 
 const generateReview = (product_id, product_type, gender, userAmount) => {
   const user_id = random(userAmount) + 1;
-  const rating = random(5) + 1;
+  const rating = random(5, 0.4) + 1;
   const title = faker.lorem.words(random(4) + 1);
   const text = faker.lorem.sentences(random(15) + 1) + faker.lorem.paragraphs(random(1));
   let recommended = [null, true, false];
   recommended = recommended[random(recommended.length)];
-  let age = [null, 'Under 18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 74', '75 or over'];
-  age = age[random(age.length)];
-
+  let age = ['Under 18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 74', '75 or over'];
+  const review_time = random(1000) + 1;
+  const helpful_yes = random(100);
+  let helpful_no = [0, 15];
+  helpful_no = random(helpful_no[random(2)]);
   // Initializing data even if null or else query will not generate.
   let best_for;
   let experience_level;
@@ -72,7 +74,8 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
   }
   weight_range.push('More than 400 lbs');
 
-  if (random(2)) {
+  if (random(3)) {
+    age = age[random(age.length)];
     if (product_type === 'shoes') {
       overall_fit_rating = random(3) + 1;
       width_rating = random(3) + 1;
@@ -80,8 +83,7 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
       best_for = ['Gym Climbing', 'Bouldering', 'Sport Climbing', 'Trad Climbing', 'Mountaineering', 'Canyoneering'];
       best_for = best_for[random(best_for.length)];
       experience_level = experience_level[random(experience_level.length)];
-    }
-    if (product_type === 'clothing') {
+    } else if (product_type === 'clothing') {
       overall_fit_rating = random(3) + 1;
       warmth_rating = random(3) + 1;
       product_weight_rating = random(3) + 1;
@@ -90,12 +92,9 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
         body_type = ['Curvy', 'Slender', 'Athletic', 'Petite'];
         body_type = body_type[random(body_type.length)];
       }
-      experience_level = ['Casual', 'Beginner', 'Experienced', 'Competitive'];
-      experience_level = experience_level[random(experience_level.length)];
-    }
-    if (product_type === 'tent') {
+    } else if (product_type === 'tent') {
       ease_of_assembly_rating = random(3) + 1;
-      best_for = [null, 'Backpacking', 'Car Camping', 'RV Camping', 'Backyard Use', 'Emergency Preparedness', 'Mountaineering', 'Overlanding'];
+      best_for = ['Backpacking', 'Car Camping', 'RV Camping', 'Backyard Use', 'Emergency Preparedness', 'Mountaineering', 'Overlanding'];
       const best = [];
       const num = random(3);
       for (let i = 0; i < num; i += 1) {
@@ -106,7 +105,7 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
       weight_range = weight_range[random(weight_range.length)];
     }
   }
-  const query = `INSERT INTO reviews (product_id, user_id, rating, title, text, recommended, age, best_for, experience_level, typical_shoe_size, height, weight_range, ease_of_use_rating, ease_of_assembly_rating, width_rating, product_weight_rating, overall_fit_rating, warmth_rating, body_type)
+  const query = `INSERT INTO reviews (product_id, user_id, rating, title, text, recommended, helpful_yes, helpful_no, age, best_for, review_time, experience_level, typical_shoe_size, height, weight_range, ease_of_use_rating, ease_of_assembly_rating, width_rating, product_weight_rating, overall_fit_rating, warmth_rating, body_type)
   VALUES (
     ${product_id},
     ${user_id},
@@ -114,8 +113,11 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
     "${title}",
     "${text}",
     ${recommended},
-    ${age ? `"${age}"` : null},
+    ${helpful_yes},
+    ${helpful_no},
+    ${typeof age === 'string' ? `"${age}"` : null},
     ${best_for ? `"${best_for}"` : null},
+    ${review_time},
     ${typeof experience_level === 'string' ? `"${experience_level}"` : null},
     ${typeof typical_shoe_size === 'string' ? `"${typical_shoe_size}"` : null},
     ${typeof height === 'string' ? `"${height}"` : null},
@@ -135,8 +137,8 @@ module.exports.generateProduct = generateProduct;
 module.exports.generateUser = generateUser;
 module.exports.generateReview = generateReview;
 
-// console.log(generate_product(0, `Arc'teryx Women's Andessa Down Jacket`, 'clothing', 'F', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/1.jpeg'));
-// console.log(generate_product(1, `Patagonia Nano Puff Insulated Hoodie - Men's`, 'clothing', 'M', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/2.jpeg'));
-// console.log(generate_product(2, `Outdoor Research Bug Bivy`, 'tent', null, 'https://s3-us-west-1.amazonaws.com/rei.review.photos/3.jpeg'));
-// console.log(generate_product(3, `REI Co-op Kingdom 6 Tent`, 'tent', null, 'https://s3-us-west-1.amazonaws.com/rei.review.photos/4.jpeg'));
-// console.log(generate_product(4, `Black Diamond Momentum Climbing Shoes - Ash - Men's`, 'shoes', 'M', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/5.jpeg'));
+// console.log(generate_product(1, `Arc'teryx Women's Andessa Down Jacket`, 'clothing', 'F', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/1.jpeg'));
+// console.log(generate_product(2, `Patagonia Nano Puff Insulated Hoodie - Men's`, 'clothing', 'M', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/2.jpeg'));
+// console.log(generate_product(3, `Outdoor Research Bug Bivy`, 'tent', null, 'https://s3-us-west-1.amazonaws.com/rei.review.photos/3.jpeg'));
+// console.log(generate_product(4, `REI Co-op Kingdom 6 Tent`, 'tent', null, 'https://s3-us-west-1.amazonaws.com/rei.review.photos/4.jpeg'));
+// console.log(generate_product(5, `Black Diamond Momentum Climbing Shoes - Ash - Men's`, 'shoes', 'M', 'https://s3-us-west-1.amazonaws.com/rei.review.photos/5.jpeg'));

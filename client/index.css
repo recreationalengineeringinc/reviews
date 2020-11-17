@@ -1,0 +1,39 @@
+@font-face {
+  font-family: Stuart;
+  font-weight: 1 999;
+  src: url("//www.rei.com/satchel/media/font-optimized/Stuart/REIStuart-VF-Web-Subset.woff2") format("woff2-variations"), url("//www.rei.com/satchel/media/font-optimized/Stuart/REIStuart-VF-Web-Subset.woff2") format("woff2"); }
+@font-face {
+  font-family: Stuart;
+  font-weight: 1 999;
+  font-style: italic;
+  src: url("//www.rei.com/satchel/media/font-optimized/Stuart/REIStuartWebItalics-VF-Web-Subset.woff2") format("woff2-variations"), url("//www.rei.com/satchel/media/font-optimized/Stuart/REIStuartWebItalics-VF-Web-Subset.woff2") format("woff2"); }
+@font-face {
+  font-family: Graphik;
+  font-weight: 1 999;
+  src: url("//www.rei.com/satchel/media/font-optimized/Graphik/Graphik-VF-Web-Subset.woff2") format("woff2-variations"), url("//www.rei.com/satchel/media/font-optimized/Graphik/Graphik-VF-Web-Subset.woff2") format("woff2"); }
+@font-face {
+  font-family: Graphik;
+  font-weight: 1 999;
+  font-style: italic;
+  src: url("//www.rei.com/satchel/media/font-optimized/Graphik/GraphikWebItalic-VF-Web-Subset.woff2") format("woff2-variations"), url("//www.rei.com/satchel/media/font-optimized/Graphik/GraphikWebItalic-VF-Web-Subset.woff2") format("woff2"); }
+
+div {
+  font-family: Graphik, serif;
+  color: rgb(36, 36, 36)
+}
+
+#reviewsHeader {
+  font-weight: 420;
+  font-size: 22px;
+  font-family: Stuart, serif;
+}
+
+#writeReview {
+  font-size: 15px;
+  font-weight: 530;
+  padding: 10px 12px;
+  border: 1px solid #446e91;
+  border-radius: 2px;
+  background-color:	#446e91;
+  color: #fdfdfe;
+}

@@ -44,7 +44,6 @@ class Reviews extends React.Component {
           if (result[i].text === undefined) { break; }
           // User Info
           review.user = {};
-          review.user.age = result[i].age;
           review.user.totalreviews = result[i].total_reviews;
           review.user.location = result[i].location;
           review.user.username = result[i].username;
@@ -60,12 +59,13 @@ class Reviews extends React.Component {
           review.helpful.no = result[i].helpful_no;
           review.helpful.clicked = result[i].helpful_clicked;
           review.optional = {};
-          review.optional.bestFor = result[i].best_for;
-          review.optional.experienceLevel = result[i].experience_level;
-          review.optional.typicalShoeSize = result[i].typical_shoe_size;
-          review.optional.height = result[i].height;
-          review.optional.weightRange = result[i].weight_range;
-          review.optional.bodyType = result[i].body_type;
+          review.optional['Age'] = result[i].age;
+          review.optional['Best for:'] = result[i].best_for;
+          review.optional['Experience Level'] = result[i].experience_level;
+          review.optional['Typical Shoe Size'] = result[i].typical_shoe_size;
+          review.optional['Height'] = result[i].height;
+          review.optional['Weight Range'] = result[i].weight_range;
+          review.optional['Body Type'] = result[i].body_type;
           review.optional.rating = {};
           review.optional.rating.easeOfUse = result[i].ease_of_use_rating;
           review.optional.rating.easeOfAssembly = result[i].ease_of_assembly_rating;

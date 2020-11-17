@@ -5,6 +5,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import ReviewComment from './reviewComment';
+import './reviewsList.css';
 
 const ReviewsList = ({ reviews, totalReviews }) => (
   <div className="reviewsList-container">

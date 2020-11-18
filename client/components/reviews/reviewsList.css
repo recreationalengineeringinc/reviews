@@ -99,6 +99,68 @@ span#report {
 
 .optional-rating-container {
   flex: 1;
+  margin-top: 35px;
+  max-width: 235px;
+  padding-right: 50px;
+  padding-left: 20px;
+  font-size: 15px;
+}
+
+.optionalRatingTitle {
+  margin-bottom: 9px;
+}
+
+.optionalBar {
+  max-width: 225px;
+  width: 100%;
+  height: 9px;
+  position: relative;
+  border: 1px solid #cccccc;
+  vertical-align: middle;
+  background: #fff;
+  /* overflow: hidden; */
+}
+
+.middleMarker {
+  background: #999999;
+  position: absolute;
+  height: 13px;
+  width: 1px;
+  left: 50%;
+  bottom: -2px;
+  transform: translate(-50%, 0%);
+}
+
+.ratingSquare {
+  background: linear-gradient(#6b93b2, #2e6893);
+  border-left: 1px solid #a2b9ce;
+  border-right: 1px solid 	#255070;
+  position: absolute;
+  height: 13px;
+  width: 12px;
+  bottom: -2px;
+  transform: translate(-50%, 0%);
+  z-index: 1;
+}
+
+.ratingDescription-container {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.lowRating {
+  position: relative;
+  right: 15px;
+}
+
+.highRating {
+  position: relative;
+  text-align: right;
+  left: 15px;
+}
+li {
+  list-style: none;
 }
 
 .bold {
@@ -114,7 +176,7 @@ button {
   padding: 7px 10px;
 }
 
-button:hover {
+button.commentButton:hover {
   cursor: pointer;
   box-shadow: inset 0px 0px 2px 2px #e2e2e2af;
 }

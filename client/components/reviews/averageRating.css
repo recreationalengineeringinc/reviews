@@ -1,0 +1,47 @@
+.averageRating-container {
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  min-width: 200px;
+  margin-right: 105px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.averageRating-header {
+  font-family: Graphik, sans-serif;
+  padding-bottom: 15px;
+}
+
+.averageScore-container {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  max-width: 400px;
+  min-width: 325px;
+  margin-bottom: 20px;
+}
+
+.averageRatingTitle {
+  width: 55%;
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.averageBar {
+  flex: 1;
+  width: 150px;
+  height: 9px;
+  position: relative;
+  border: 1px solid #cccccc;
+  vertical-align: middle;
+  background: #fff;
+  margin-bottom: 5px;
+}
+
+.overallRatingScore {
+  /* flex: 1; */
+  width: 200px;
+}
+
+.large-text {
+  transform: translate(0%, 10%);
+}

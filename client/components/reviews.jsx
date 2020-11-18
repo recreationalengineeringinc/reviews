@@ -6,6 +6,7 @@ import React from 'react';
 import axios from 'axios';
 import RatingSnapshot from './reviews/ratingSnapshot';
 import ReviewsList from './reviews/reviewsList';
+import AverageRatings from './reviews/averageRatings';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Reviews extends React.Component {
           review.optional.rating.width = result[i].width_rating;
           review.optional.rating.productWeight = result[i].product_weight_rating;
           review.optional.rating.overallFit = result[i].overall_fit_rating;
-          review.optional.rating.wamrth = result[i].warmth_rating;
+          review.optional.rating.warmth = result[i].warmth_rating;
           // Overall Info
           this.increase('rating', result[i].rating);
           // Optional Review Stats
@@ -101,6 +102,7 @@ class Reviews extends React.Component {
     e.preventDefault();
     const target = e.target.id;
     const { reviews } = this.state;
+    let { renderLength } = this.state;
     if (target === 'yes' || target === 'no' || target === 'report') {
       for (let i = 0; i < reviews.length; i += 1) {
         if (reviews[i].id === comment.id) {
@@ -115,7 +117,15 @@ class Reviews extends React.Component {
         }
       }
       // setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, renderLength) }));
+    }
+    if (target === 'loadMore') {
+      if (reviews.length < renderLength + 30) {
+        renderLength = reviews.length;
+      } else {
+        renderLength += 30;
+      }
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, renderLength) }));
     }
   }
 
@@ -145,7 +155,10 @@ class Reviews extends React.Component {
         <div>
           <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
         </div>
-        <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+        <div className="overallRatingContainer">
+          <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+          <AverageRatings overall={this.state.overall} />
+        </div>
         <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
       </div>
     );

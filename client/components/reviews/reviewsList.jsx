@@ -11,7 +11,7 @@ const ReviewsList = ({ reviews, totalReviews, handleClick }) => (
   <div className="reviewsList-container">
     <div className="reviewsList-header">
       <div>1–{reviews.length} of {totalReviews} Reviews</div>
-      <div>Sort by:</div>
+      <div className="reviewSort">Sort by:</div>
     </div>
     {reviews.map((comment, i) =>
       <ReviewComment key={i} comment={comment} handleClick={handleClick} />,

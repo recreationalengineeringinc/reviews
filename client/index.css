@@ -18,7 +18,8 @@
   src: url("//www.rei.com/satchel/media/font-optimized/Graphik/GraphikWebItalic-VF-Web-Subset.woff2") format("woff2-variations"), url("//www.rei.com/satchel/media/font-optimized/Graphik/GraphikWebItalic-VF-Web-Subset.woff2") format("woff2"); }
 
 div {
-  font-family: Graphik, serif;
+  font-family: Graphik, sans-serif;
+  /* font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif; */
   color: rgb(36, 36, 36)
 }
 

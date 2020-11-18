@@ -1,3 +1,5 @@
+/* eslint-disable dot-notation */
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';

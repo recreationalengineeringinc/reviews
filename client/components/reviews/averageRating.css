@@ -1,6 +1,7 @@
 .averageRating-container {
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   min-width: 200px;
+  margin-top: 40px;
   margin-right: 105px;
   /* display: flex;
   flex-direction: column; */

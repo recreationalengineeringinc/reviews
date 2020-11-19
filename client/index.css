@@ -57,3 +57,33 @@
   margin-bottom: 50px;
   margin-top: 65px;
 }
+
+.loadMore-container {
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loadMore {
+  margin: 20px 0;
+  margin-bottom: 40px;
+  padding: 7px 130px;
+  background-color: #EEEEEE;
+  color: #222;
+}
+
+#loadMore:hover {
+  cursor: pointer;
+  box-shadow: inset 0px 0px 3px 3px #ddd;
+}
+
+.firstReview {
+  font-size: 14px;
+}
+
+.firstReviewComment:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

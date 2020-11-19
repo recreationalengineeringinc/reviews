@@ -11,10 +11,20 @@ const ReviewsList = ({ reviews, totalReviews, handleClick }) => (
   <div className="reviewsList-container">
     <div className="reviewsList-header">
       <div>1–{reviews.length} of {totalReviews} Reviews</div>
-      <div className="reviewSort">Sort by:</div>
+      <div className="reviewSort">
+        Sort by: <span className="dropdown">Most Recent</span><span className="dropArrow">▼</span>
+        <div className="transparent" />
+        <div className="dropdown-content">
+          <p>Most Relevant</p>
+          <p>Most Helpful</p>
+          <p>Highest to Lowest Rating</p>
+          <p>Lowest to Highest Rating</p>
+          <p>Most Recent</p>
+        </div>
+      </div>
     </div>
-    {reviews.map((comment, i) =>
-      <ReviewComment key={i} comment={comment} handleClick={handleClick} />,
+    {reviews.map((comment) =>
+      <ReviewComment key={comment.id} comment={comment} handleClick={handleClick} />,
     )}
   </div>
 );

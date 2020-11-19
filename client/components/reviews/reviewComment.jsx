@@ -69,7 +69,7 @@ const ReviewComment = ({ comment, handleClick }) => {
   }
 
   return (
-    <div className="comment-container">
+    <div className="comment-container" id={`${comment.id}`}>
       <div className="user-container">
         <div className="user bold">{comment.user.username}</div>
         <div className="userLocation">{comment.user.location}</div>

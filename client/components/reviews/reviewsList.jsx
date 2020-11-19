@@ -5,6 +5,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import ReviewComment from './reviewComment';
+import ActiveFilters from './activeFilters';
 import './reviewsList.css';
 
 const ReviewsList = ({ reviews, totalReviews, handleClick, filter }) => (
@@ -23,6 +24,7 @@ const ReviewsList = ({ reviews, totalReviews, handleClick, filter }) => (
         </div>
       </div>
     </div>
+    <ActiveFilters filter={filter} />
     {reviews.map((comment) =>
       <ReviewComment key={comment.id} comment={comment} handleClick={handleClick} />,
     )}

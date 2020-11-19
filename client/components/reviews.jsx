@@ -138,7 +138,11 @@ class Reviews extends React.Component {
         }
       }
       // setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+      if (this.state.filter.bool) {
+        this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+      } else {
+        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+      }
     }
     if (target === 'loadMore') {
       if (this.state.filter.bool) {

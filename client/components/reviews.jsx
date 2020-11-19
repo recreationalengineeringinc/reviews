@@ -31,6 +31,7 @@ class Reviews extends React.Component {
       filter: {
         bool: false,
         ratings: {},
+        length: 0,
       },
     };
     this.listRef = React.createRef();
@@ -146,7 +147,7 @@ class Reviews extends React.Component {
         } else {
           this.state.renderLength += 30;
         }
-        this.setState((prevState) => ({ renderedReviews: prevState.renderedReviews.slice(0, this.state.renderLength) }));
+        this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
       } else {
         if (reviews.length < this.state.renderLength + 30) {
           this.state.renderLength = reviews.length;
@@ -178,30 +179,41 @@ class Reviews extends React.Component {
     e.preventDefault();
     const { reviews, filter } = this.state;
     this.state.filteredReviews = [];
+    this.state.renderLength = 12;
     this.state.filter.bool = true;
+    this.state.filter.length = 0;
     this.state.filter.ratings[id] = true;
     for (let i = 0; i < reviews.length; i += 1) {
       if (filter.ratings[`${reviews[i].rating}`]) {
         this.state.filteredReviews.push(reviews[i]);
+        this.state.filter.length += 1;
       }
     }
-    this.setState((prevState) => ({ renderedReviews: prevState.renderedReviews.slice(0, this.state.renderLength) }));
+    this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
   }
 
   render() {
     const totalReviews = this.state.overall.rating.count;
     const { renderedReviews } = this.state;
     let loadMore;
-    if (this.state.renderLength < totalReviews) {
+    if (this.state.filter.bool) {
+      if (this.state.renderLength < this.state.filteredReviews.length) {
+        loadMore = (
+          <button id="loadMore" type="button" onClick={this.handleClick}>
+            Load more
+          </button>
+        );
+      }
+    } else if (this.state.renderLength < totalReviews) {
       loadMore = (
         <button id="loadMore" type="button" onClick={this.handleClick}>
           Load more
-          {/* <a href={`#${renderedReviews[renderedReviews.length - 1].id}`}>Load More</a> */}
         </button>
       );
     } else {
       loadMore = null;
     }
+
     let reviewApp;
     if (totalReviews > 0) {
       reviewApp = (

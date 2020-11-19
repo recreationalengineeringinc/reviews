@@ -29,18 +29,18 @@ const ReviewComment = ({ comment, handleClick }) => {
 
   let time;
   if (comment.time < 30) {
-    time = <div>{comment.time} days ago</div>;
+    time = `${comment.time} days ago`;
   } else if (comment.time < 365) {
     if (Math.floor(comment.time / 30) === 1) {
-      time = <div>a month ago</div>;
+      time = 'a month ago';
     } else {
-      time = <div>{Math.floor(comment.time / 30)} months ago</div>;
+      time = `${Math.floor(comment.time / 30)} months ago`;
     }
   } else {
     if (Math.floor(comment.time / 365) === 1) {
-      time = <div>a year ago</div>;
+      time = 'a year ago';
     } else {
-      time = <div>{Math.floor(comment.time / 365)} years ago</div>;
+      time = `${Math.floor(comment.time / 365)} years ago`;
     }
   }
 
@@ -74,15 +74,18 @@ const ReviewComment = ({ comment, handleClick }) => {
         <div className="user bold">{comment.user.username}</div>
         <div className="userLocation">{comment.user.location}</div>
         <div className="user">
-          {comment.user.totalreviews > 1 ? 'Reviews' : 'Review' }
+          {comment.user.totalreviews > 1 ? 'Reviews' : 'Review'}
           <span className="bold">&nbsp;{comment.user.totalreviews}</span>
         </div>
       </div>
       <div className="review-text-container">
         <div className="review-text-header">
-          <div className="rating">
-            <div>Stars ·</div>
-            {time}
+          <div className="commentRating">
+            <div className="starRating">
+              <div className="empty-stars" />
+              <div className="full-stars" style={{ width: `${(comment.rating / 5) * 100}%` }} />
+            </div>
+            <div className="reviewTime">{` · ${time}`}</div>
           </div>
           <div className="review-title bold">{comment.title}</div>
         </div>

@@ -5,6 +5,20 @@ import React from 'react';
 const AverageRatingItem = ({ category, rating, total = 1 }) => {
   if (!total) { return null; }
   if (rating === null) { return null; }
+  if (category === 'rating') {
+    return (
+      <div className="starRating-container">
+        <div className="starRatingTitle">Overall</div>
+        <div className="starRating">
+          <div className="empty-stars" />
+          <div className="full-stars" style={{ width: `${((rating / total) / 5) * 100}%` }} />
+        </div>
+        <div className="overallRatingScore">
+          {(rating / total).toFixed(1)}
+        </div>
+      </div>
+    );
+  }
   if (category === 'easeOfAssembly') {
     return (
       <div className="averageScore-container">

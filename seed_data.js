@@ -27,10 +27,10 @@ const generateReview = (product_id, product_type, gender, userAmount) => {
   let recommended = [null, true, false];
   recommended = recommended[random(recommended.length)];
   let age = ['Under 18', '18 to 24', '25 to 34', '35 to 44', '45 to 54', '55 to 64', '65 to 74', '75 or over'];
-  const review_time = random(1000) + 1;
+  const review_time = random(1500) + 1;
   const helpful_yes = random(100);
-  let helpful_no = [0, 15];
-  helpful_no = random(helpful_no[random(2)]);
+  let helpful_no = [0, 20];
+  helpful_no = random(helpful_no[random(2)], 1.2);
   // Initializing data even if null or else query will not generate.
   let best_for;
   let experience_level;

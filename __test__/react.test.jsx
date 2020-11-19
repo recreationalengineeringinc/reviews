@@ -42,3 +42,46 @@ describe('<RatingSnapshot /> to recieve props from Review State.', () => {
     expect(wrapper.render().find('#5stars .percentageReview').prop('style')).toHaveProperty('width', '50%');
   });
 });
+
+describe('Check click event of helpful and reported.', () => {
+  const review = {
+    id: 1,
+    rating: 4,
+    text: 'testing sucks',
+    time: 4,
+    title: 'why',
+    optional: {},
+    user: {
+      location: 'fake place',
+      username: 'test',
+      totalreviews: 1,
+    },
+    helpful: {
+      yes: 10,
+      no: 1,
+      clicked: false,
+    },
+    reported: false,
+  };
+
+  it('Expect reported to be true after click.', () => {
+    const wrapper = mount(<Reviews />);
+    wrapper.setState({ renderedReviews: [review], reviews: [review] });
+    expect(wrapper.state('renderedReviews')[0].reported).toBe(false);
+    wrapper.find('#report').simulate('click');
+    expect(wrapper.state('renderedReviews')[0].reported).toBe(true);
+  });
+
+  it('Expect helpful to be increment only by 1 after multiple clicks.', () => {
+    const wrapper = mount(<Reviews />);
+    wrapper.setState({ renderedReviews: [review], reviews: [review] });
+    expect(wrapper.state('renderedReviews')[0].helpful.yes).toBe(10);
+    wrapper.find('#yes').simulate('click');
+    expect(wrapper.state('renderedReviews')[0].helpful.yes).toBe(11);
+    wrapper.find('#yes').simulate('click');
+    expect(wrapper.state('renderedReviews')[0].helpful.yes).toBe(11);
+    expect(wrapper.state('renderedReviews')[0].helpful.no).toBe(1);
+    wrapper.find('#no').simulate('click');
+    expect(wrapper.state('renderedReviews')[0].helpful.no).toBe(1);
+  });
+});

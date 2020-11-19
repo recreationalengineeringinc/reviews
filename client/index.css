@@ -36,4 +36,11 @@ div {
   border-radius: 2px;
   background-color:	#446e91;
   color: #fdfdfe;
+  cursor: pointer;
+}
+
+#writeReview:hover {
+  color: #fff;
+  background-color: #2B455C;
+  border-color: #2B455C;
 }

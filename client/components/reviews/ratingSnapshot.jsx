@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable function-paren-newline */
@@ -7,7 +8,7 @@ import React from 'react';
 import StarBar from './starBar';
 import './ratingSnapshot.css';
 
-const RatingSnapshot = ({ reviewsCount, totalReviews }) => {
+const RatingSnapshot = ({ reviewsCount, totalReviews, filterReviews }) => {
   const counts = [];
   for (let i = 5; i > 0; i -= 1) {
     counts.push(reviewsCount[i]);
@@ -21,7 +22,7 @@ const RatingSnapshot = ({ reviewsCount, totalReviews }) => {
       </div>
       <div className="histogram-container">
         {counts.map((count, i) =>
-          <StarBar key={i} count={count} i={i} totalReviews={totalReviews} />,
+          <StarBar key={i} count={count} i={i} totalReviews={totalReviews} filterReviews={filterReviews} />,
         )}
       </div>
     </div>

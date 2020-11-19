@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RatingSnapshot from './reviews/ratingSnapshot';
 import ReviewsList from './reviews/reviewsList';
@@ -15,6 +15,7 @@ class Reviews extends React.Component {
     this.state = {
       product: {},
       reviews: [],
+      filteredReviews: [],
       renderedReviews: [],
       reviewsCount: {},
       overall: {
@@ -27,10 +28,15 @@ class Reviews extends React.Component {
         warmth: { total: 0, count: 0 },
       },
       renderLength: 12,
+      filter: {
+        bool: false,
+        ratings: {},
+      },
     };
     this.listRef = React.createRef();
     this.scrollTo = null;
     this.handleClick = this.handleClick.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidMount() {
@@ -134,12 +140,21 @@ class Reviews extends React.Component {
       this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
     if (target === 'loadMore') {
-      if (reviews.length < this.state.renderLength + 30) {
-        this.state.renderLength = reviews.length;
+      if (this.state.filter.bool) {
+        if (this.state.filteredReviews.length < this.state.renderLength + 30) {
+          this.state.renderLength = this.state.filteredReviews.length;
+        } else {
+          this.state.renderLength += 30;
+        }
+        this.setState((prevState) => ({ renderedReviews: prevState.renderedReviews.slice(0, this.state.renderLength) }));
       } else {
-        this.state.renderLength += 30;
+        if (reviews.length < this.state.renderLength + 30) {
+          this.state.renderLength = reviews.length;
+        } else {
+          this.state.renderLength += 30;
+        }
+        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
       }
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
   }
 
@@ -157,6 +172,20 @@ class Reviews extends React.Component {
       overall[prop].total += num;
       overall[prop].count += 1;
     }
+  }
+
+  filterReviews(e, id) {
+    e.preventDefault();
+    const { reviews, filter } = this.state;
+    this.state.filteredReviews = [];
+    this.state.filter.bool = true;
+    this.state.filter.ratings[id] = true;
+    for (let i = 0; i < reviews.length; i += 1) {
+      if (filter.ratings[`${reviews[i].rating}`]) {
+        this.state.filteredReviews.push(reviews[i]);
+      }
+    }
+    this.setState((prevState) => ({ renderedReviews: prevState.renderedReviews.slice(0, this.state.renderLength) }));
   }
 
   render() {
@@ -182,15 +211,15 @@ class Reviews extends React.Component {
             <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
           </div>
           <div className="overallRatingContainer">
-            <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+            <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} filterReviews={this.filterReviews} />
             <AverageRatings overall={this.state.overall} />
           </div>
-          <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
+          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} />
           <div ref={this.listRef} className="loadMore-container">
             {loadMore}
           </div>
         </div>
-      )
+      );
     } else {
       reviewApp = (
         <div className="firstReview">

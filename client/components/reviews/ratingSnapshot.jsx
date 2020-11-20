@@ -14,10 +14,10 @@ const RatingSnapshot = ({ reviewsCount, totalReviews }) => {
   }
 
   return (
-    <div>
+    <div className="snapshot-container">
       <div className="histogram-header">
-        <h4>Rating Snapshot</h4>
-        <p>Select a row below to filter reviews.</p>
+        <div>Rating Snapshot</div>
+        <div>Select a row below to filter reviews.</div>
       </div>
       <div className="histogram-container">
         {counts.map((count, i) =>

@@ -50,7 +50,7 @@ describe('Check click event of helpful and reported.', () => {
     text: 'testing sucks',
     time: 4,
     title: 'why',
-    optional: {},
+    optional: { rating: {} },
     user: {
       location: 'fake place',
       username: 'test',

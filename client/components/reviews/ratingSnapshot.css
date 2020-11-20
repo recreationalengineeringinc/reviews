@@ -1,13 +1,23 @@
-h4 {
-  font-weight: 400;
+.snapshot-container {
+  margin: 0 45px;
+}
+
+.histogram-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 50px;
+  min-height: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .barContainer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   max-width: 400px;
-  min-width: 300px;
+  min-width: 325px;
   margin-bottom: 10px;
 }
 

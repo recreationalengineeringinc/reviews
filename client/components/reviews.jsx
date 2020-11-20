@@ -1,9 +1,13 @@
+/* eslint-disable dot-notation */
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RatingSnapshot from './reviews/ratingSnapshot';
 import ReviewsList from './reviews/reviewsList';
+import AverageRatings from './reviews/averageRatings';
 
 class Reviews extends React.Component {
   constructor(props) {
@@ -24,7 +28,8 @@ class Reviews extends React.Component {
       },
       renderLength: 12,
     };
-
+    this.listRef = React.createRef();
+    this.scrollTo = null;
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -76,7 +81,7 @@ class Reviews extends React.Component {
           review.optional.rating.width = result[i].width_rating;
           review.optional.rating.productWeight = result[i].product_weight_rating;
           review.optional.rating.overallFit = result[i].overall_fit_rating;
-          review.optional.rating.wamrth = result[i].warmth_rating;
+          review.optional.rating.warmth = result[i].warmth_rating;
           // Overall Info
           this.increase('rating', result[i].rating);
           // Optional Review Stats
@@ -94,6 +99,19 @@ class Reviews extends React.Component {
         this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
       });
   }
+
+  // componentDidUpdate() {
+  //   const list = this.listRef.current;
+  //   // const scroll = {
+  //   //   top: list.top,
+  //   //   left: list.left,
+  //   //   behavior: 'smooth',
+  //   // };
+  //   console.log(list.getBoundingClientRect());
+  //   this.scrollTo = list.getBoundingClientRect().top;
+  //   window.scrollTo(0, 4842.25);
+  //   // window.scrollTo(0, list.getBoundingClientRect().top);
+  // }
 
   handleClick(e, comment = {}) {
     e.preventDefault();
@@ -115,9 +133,16 @@ class Reviews extends React.Component {
       // setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
       this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
+    if (target === 'loadMore') {
+      if (reviews.length < this.state.renderLength + 30) {
+        this.state.renderLength = reviews.length;
+      } else {
+        this.state.renderLength += 30;
+      }
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+    }
   }
 
-  // 1 - 12, 42 +30...
   increase(prop, num) {
     const { overall } = this.state;
     const { reviewsCount } = this.state;
@@ -136,15 +161,49 @@ class Reviews extends React.Component {
 
   render() {
     const totalReviews = this.state.overall.rating.count;
+    const { renderedReviews } = this.state;
+    let loadMore;
+    if (this.state.renderLength < totalReviews) {
+      loadMore = (
+        <button id="loadMore" type="button" onClick={this.handleClick}>
+          Load more
+          {/* <a href={`#${renderedReviews[renderedReviews.length - 1].id}`}>Load More</a> */}
+        </button>
+      );
+    } else {
+      loadMore = null;
+    }
+    let reviewApp;
+    if (totalReviews > 0) {
+      reviewApp = (
+        <div>
+          <h2 id="reviewsHeader">Reviews</h2>
+          <div>
+            <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
+          </div>
+          <div className="overallRatingContainer">
+            <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+            <AverageRatings overall={this.state.overall} />
+          </div>
+          <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
+          <div ref={this.listRef} className="loadMore-container">
+            {loadMore}
+          </div>
+        </div>
+      )
+    } else {
+      reviewApp = (
+        <div className="firstReview">
+          <h2 id="reviewsHeader">Reviews</h2>
+          <div className="empty-stars starRating" />
+          <div className="firstReviewComment">Be the first to review this product</div>
+        </div>
+      );
+    }
 
     return (
       <div>
-        <h2 id="reviewsHeader">Reviews</h2>
-        <div>
-          <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
-        </div>
-        <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
-        <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
+        {reviewApp}
       </div>
     );
   }

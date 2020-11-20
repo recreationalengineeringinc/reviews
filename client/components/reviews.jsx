@@ -188,8 +188,14 @@ class Reviews extends React.Component {
     e.preventDefault();
     const { reviews, filter } = this.state;
     this.state.filter.ratings[id] = clear;
+    console.log(id);
     if (!clear) {
       delete this.state.filter.ratings[id];
+      if (!Object.keys(this.state.filter.ratings).length) {
+        this.state.filter.bool = false;
+        this.rerender();
+        return;
+      }
     }
     this.state.filteredReviews = [];
     this.state.renderLength = 12;
@@ -246,7 +252,7 @@ class Reviews extends React.Component {
             <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} filterReviews={this.filterReviews} />
             <AverageRatings overall={this.state.overall} />
           </div>
-          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} />
+          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} filterReviews={this.filterReviews} />
           <div ref={this.listRef} className="loadMore-container">
             {loadMore}
           </div>

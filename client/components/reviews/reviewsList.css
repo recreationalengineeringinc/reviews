@@ -206,7 +206,7 @@ button.commentButton:hover {
 }
 
 button:active, button:focus {
-  outline: dotted 1px;
+  outline: dotted 1px #000;
 }
 
 .dropArrow {
@@ -266,6 +266,9 @@ p {
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
   font-size: 14px;
 }
+#clearFilter:hover, .activeFilter:hover {
+  cursor: pointer;
+}
 
 #clearFilter {
   background-color: transparent;
@@ -282,11 +285,6 @@ p {
   color: white;
   margin-right: 4px;
 }
-/* .fa-times-circle.activeFilter {
-  color: #fff;
-  background-color: #507698;
-} */
-
 
 /* .fade-in {
   animation: fadeIn ease 0.5s;

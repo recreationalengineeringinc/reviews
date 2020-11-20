@@ -4,7 +4,6 @@ import React from 'react';
 
 const StarBar = (props) => {
   const percentage = (props.count / props.totalReviews) * 100;
-  console.log(props.count);
   if (props.count) {
     return (
       <button id={`${5 - props.i}stars`} type="button" className="barContainer" onClick={(e) => props.filterReviews(e, `${5 - props.i}`)}>

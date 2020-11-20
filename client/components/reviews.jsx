@@ -147,14 +147,14 @@ class Reviews extends React.Component {
         } else {
           this.state.renderLength += 30;
         }
-        this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+        this.renrender();
       } else {
         if (reviews.length < this.state.renderLength + 30) {
           this.state.renderLength = reviews.length;
         } else {
           this.state.renderLength += 30;
         }
-        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+        this.rerender();
       }
     }
     if (target === 'clearFilter') {
@@ -165,14 +165,6 @@ class Reviews extends React.Component {
         length: 0,
       };
       this.rerender();
-    }
-  }
-
-  rerender() {
-    if (this.state.filter.bool) {
-      this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
-    } else {
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
   }
 
@@ -209,7 +201,15 @@ class Reviews extends React.Component {
         this.state.filter.length += 1;
       }
     }
-    this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+    this.rerender();
+  }
+
+  rerender() {
+    if (this.state.filter.bool) {
+      this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+    } else {
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+    }
   }
 
   render() {

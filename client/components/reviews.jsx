@@ -120,9 +120,10 @@ class Reviews extends React.Component {
   //   // window.scrollTo(0, list.getBoundingClientRect().top);
   // }
 
-  handleClick(e, comment = {}) {
+  handleClick(e, comment = {}, id) {
     e.preventDefault();
-    const target = e.target.id;
+    const target = e.target.id || id;
+    console.log(target);
     const { reviews } = this.state;
     if (target === 'yes' || target === 'no' || target === 'report') {
       for (let i = 0; i < reviews.length; i += 1) {
@@ -137,12 +138,7 @@ class Reviews extends React.Component {
           }
         }
       }
-      // setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
-      if (this.state.filter.bool) {
-        this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
-      } else {
-        this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
-      }
+      this.rerender();
     }
     if (target === 'loadMore') {
       if (this.state.filter.bool) {
@@ -160,6 +156,23 @@ class Reviews extends React.Component {
         }
         this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
       }
+    }
+    if (target === 'clearFilter') {
+      this.state.renderLength = 12;
+      this.state.filter = {
+        bool: false,
+        ratings: {},
+        length: 0,
+      };
+      this.rerender();
+    }
+  }
+
+  rerender() {
+    if (this.state.filter.bool) {
+      this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+    } else {
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
   }
 
@@ -179,14 +192,17 @@ class Reviews extends React.Component {
     }
   }
 
-  filterReviews(e, id) {
+  filterReviews(e, id, clear = true) {
     e.preventDefault();
     const { reviews, filter } = this.state;
+    this.state.filter.ratings[id] = clear;
+    if (!clear) {
+      delete this.state.filter.ratings[id];
+    }
     this.state.filteredReviews = [];
     this.state.renderLength = 12;
     this.state.filter.bool = true;
     this.state.filter.length = 0;
-    this.state.filter.ratings[id] = true;
     for (let i = 0; i < reviews.length; i += 1) {
       if (filter.ratings[`${reviews[i].rating}`]) {
         this.state.filteredReviews.push(reviews[i]);

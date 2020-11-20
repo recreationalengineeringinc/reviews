@@ -24,7 +24,7 @@ const ReviewsList = ({ reviews, totalReviews, handleClick, filter }) => (
         </div>
       </div>
     </div>
-    <ActiveFilters filter={filter} />
+    <ActiveFilters filter={filter} handleClick={handleClick} />
     {reviews.map((comment) =>
       <ReviewComment key={comment.id} comment={comment} handleClick={handleClick} />,
     )}

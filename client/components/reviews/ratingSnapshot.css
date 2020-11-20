@@ -22,7 +22,7 @@
   padding: 2px;
   border: none;
 }
-.barContainer:hover {
+button.barContainer:hover {
   cursor: pointer;
 }
 

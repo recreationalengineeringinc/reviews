@@ -11,6 +11,14 @@
   margin: 0 35px;
 }
 
+.reviewsList-header, .activeFilter-header {
+  font-size: 14px;
+}
+
+.activeFilter-header {
+  margin: 10px 0px;
+}
+
 .user-container {
   flex: 1;
   min-width: 200px;
@@ -58,6 +66,7 @@
 
 .review-text {
   margin-bottom: 15px;
+  line-height: 1.65;
 }
 
 .optional {
@@ -245,6 +254,39 @@ p {
   color: #fff;
   cursor: pointer;
 }
+.activeFilter-container {
+  margin-left: 35px;
+}
+
+#clearFilter, .activeFilter {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-size: 14px;
+}
+
+#clearFilter {
+  background-color: transparent;
+  color: #292929;
+  border: 1px solid #b8b8b8;
+}
+
+.activeFilter {
+  border: none;
+  border-top: 1px solid #7896AF;
+  border-bottom: 1px solid #223d50;
+  background-color: #507698;
+  overflow: hidden;
+  color: white;
+  margin-right: 4px;
+}
+/* .fa-times-circle.activeFilter {
+  color: #fff;
+  background-color: #507698;
+} */
+
 
 /* .fade-in {
   animation: fadeIn ease 0.5s;

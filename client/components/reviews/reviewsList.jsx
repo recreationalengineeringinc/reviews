@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable function-paren-newline */
 /* eslint-disable implicit-arrow-linebreak */
@@ -5,12 +6,13 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import ReviewComment from './reviewComment';
+import ActiveFilters from './activeFilters';
 import './reviewsList.css';
 
-const ReviewsList = ({ reviews, totalReviews, handleClick }) => (
+const ReviewsList = ({ reviews, totalReviews, handleClick, filter, filterReviews }) => (
   <div className="reviewsList-container">
     <div className="reviewsList-header">
-      <div>1–{reviews.length} of {totalReviews} Reviews</div>
+      <div>1–{reviews.length} of {filter.bool ? filter.length : totalReviews} Reviews</div>
       <div className="reviewSort">
         Sort by: <span className="dropdown">Most Recent</span><span className="dropArrow">▼</span>
         <div className="transparent" />
@@ -23,6 +25,7 @@ const ReviewsList = ({ reviews, totalReviews, handleClick }) => (
         </div>
       </div>
     </div>
+    <ActiveFilters filter={filter} handleClick={handleClick} filterReviews={filterReviews} />
     {reviews.map((comment) =>
       <ReviewComment key={comment.id} comment={comment} handleClick={handleClick} />,
     )}

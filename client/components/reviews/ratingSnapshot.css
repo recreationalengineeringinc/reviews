@@ -18,7 +18,12 @@
   justify-content: space-between;
   max-width: 400px;
   min-width: 325px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  padding: 2px;
+  border: none;
+}
+button.barContainer:hover {
+  cursor: pointer;
 }
 
 .histogram-star {
@@ -58,6 +63,7 @@
   background: linear-gradient(#6693b1, #2f6a95);
   border-radius: 2px;
   position: absolute;
+  left: 0;
   height: 100%;
   overflow: hidden;
 }

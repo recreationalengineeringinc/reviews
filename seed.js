@@ -61,7 +61,7 @@ const makeProducts = (amount) => {
     photo = faker.image.imageUrl(null, null, 'people', true);
     insert = query.generateProduct(i, company, name, type, productGender, photo);
     db.connection.query(insert);
-    makeReviews(random(reviews[random(reviews.length * 0.9)]), i, type, productGender, 100);
+    makeReviews(random(reviews[random(reviews.length * 0.8)]), i, type, productGender, 100);
   }
 };
 

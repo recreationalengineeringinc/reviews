@@ -3,7 +3,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RatingSnapshot from './reviews/ratingSnapshot';
 import ReviewsList from './reviews/reviewsList';
@@ -15,6 +15,7 @@ class Reviews extends React.Component {
     this.state = {
       product: {},
       reviews: [],
+      filteredReviews: [],
       renderedReviews: [],
       reviewsCount: {},
       overall: {
@@ -27,10 +28,16 @@ class Reviews extends React.Component {
         warmth: { total: 0, count: 0 },
       },
       renderLength: 12,
+      filter: {
+        bool: false,
+        ratings: {},
+        length: 0,
+      },
     };
     this.listRef = React.createRef();
     this.scrollTo = null;
     this.handleClick = this.handleClick.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidMount() {
@@ -113,9 +120,10 @@ class Reviews extends React.Component {
   //   // window.scrollTo(0, list.getBoundingClientRect().top);
   // }
 
-  handleClick(e, comment = {}) {
+  handleClick(e, comment = {}, id) {
     e.preventDefault();
-    const target = e.target.id;
+    const target = e.target.id || id;
+    console.log(target);
     const { reviews } = this.state;
     if (target === 'yes' || target === 'no' || target === 'report') {
       for (let i = 0; i < reviews.length; i += 1) {
@@ -130,16 +138,33 @@ class Reviews extends React.Component {
           }
         }
       }
-      // setTimeout(() => this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) })), 250);
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+      this.rerender();
     }
     if (target === 'loadMore') {
-      if (reviews.length < this.state.renderLength + 30) {
-        this.state.renderLength = reviews.length;
+      if (this.state.filter.bool) {
+        if (this.state.filteredReviews.length < this.state.renderLength + 30) {
+          this.state.renderLength = this.state.filteredReviews.length;
+        } else {
+          this.state.renderLength += 30;
+        }
+        this.renrender();
       } else {
-        this.state.renderLength += 30;
+        if (reviews.length < this.state.renderLength + 30) {
+          this.state.renderLength = reviews.length;
+        } else {
+          this.state.renderLength += 30;
+        }
+        this.rerender();
       }
-      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+    }
+    if (target === 'clearFilter') {
+      this.state.renderLength = 12;
+      this.state.filter = {
+        bool: false,
+        ratings: {},
+        length: 0,
+      };
+      this.rerender();
     }
   }
 
@@ -159,20 +184,62 @@ class Reviews extends React.Component {
     }
   }
 
+  filterReviews(e, id, clear = true) {
+    e.preventDefault();
+    const { reviews, filter } = this.state;
+    this.state.filter.ratings[id] = clear;
+    console.log(id);
+    if (!clear) {
+      delete this.state.filter.ratings[id];
+      if (!Object.keys(this.state.filter.ratings).length) {
+        this.state.filter.bool = false;
+        this.rerender();
+        return;
+      }
+    }
+    this.state.filteredReviews = [];
+    this.state.renderLength = 12;
+    this.state.filter.bool = true;
+    this.state.filter.length = 0;
+    for (let i = 0; i < reviews.length; i += 1) {
+      if (filter.ratings[`${reviews[i].rating}`]) {
+        this.state.filteredReviews.push(reviews[i]);
+        this.state.filter.length += 1;
+      }
+    }
+    this.rerender();
+  }
+
+  rerender() {
+    if (this.state.filter.bool) {
+      this.setState((prevState) => ({ renderedReviews: prevState.filteredReviews.slice(0, this.state.renderLength) }));
+    } else {
+      this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
+    }
+  }
+
   render() {
     const totalReviews = this.state.overall.rating.count;
     const { renderedReviews } = this.state;
     let loadMore;
-    if (this.state.renderLength < totalReviews) {
+    if (this.state.filter.bool) {
+      if (this.state.renderLength < this.state.filteredReviews.length) {
+        loadMore = (
+          <button id="loadMore" type="button" onClick={this.handleClick}>
+            Load more
+          </button>
+        );
+      }
+    } else if (this.state.renderLength < totalReviews) {
       loadMore = (
         <button id="loadMore" type="button" onClick={this.handleClick}>
           Load more
-          {/* <a href={`#${renderedReviews[renderedReviews.length - 1].id}`}>Load More</a> */}
         </button>
       );
     } else {
       loadMore = null;
     }
+
     let reviewApp;
     if (totalReviews > 0) {
       reviewApp = (
@@ -182,15 +249,15 @@ class Reviews extends React.Component {
             <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
           </div>
           <div className="overallRatingContainer">
-            <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} />
+            <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} filterReviews={this.filterReviews} />
             <AverageRatings overall={this.state.overall} />
           </div>
-          <ReviewsList reviews={this.state.renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} />
+          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} filterReviews={this.filterReviews} />
           <div ref={this.listRef} className="loadMore-container">
             {loadMore}
           </div>
         </div>
-      )
+      );
     } else {
       reviewApp = (
         <div className="firstReview">

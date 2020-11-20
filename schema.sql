@@ -2,9 +2,9 @@
     mysql -u root -p < schema.sql
     to create db and tables.      */
 
-DROP DATABASE IF EXISTS rei;
-CREATE DATABASE rei;
-USE rei;
+DROP DATABASE IF EXISTS reireviews;
+CREATE DATABASE reireviews;
+USE reireviews;
 
 CREATE TABLE products (
   id INT unsigned NOT NULL AUTO_INCREMENT,

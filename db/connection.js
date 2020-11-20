@@ -2,7 +2,7 @@
 const mysql = require('mysql');
 const user = require('./userInfo.js');
 
-const profile = Object.assign(user, { database: 'rei' });
+const profile = Object.assign(user, { database: 'reireviews' });
 const connection = mysql.createConnection(profile);
 
 connection.connect((err) => {

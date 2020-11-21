@@ -33,15 +33,17 @@ class Reviews extends React.Component {
         ratings: {},
         length: 0,
       },
+      sortBy: 'Most Recent',
     };
     this.listRef = React.createRef();
     this.scrollTo = null;
     this.handleClick = this.handleClick.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`${window.location.pathname}reviews`)
+    axios.get(`/api${window.location.pathname}reviews`)
       .then((results) => {
         const result = results.data;
         const reviews = [];
@@ -147,7 +149,7 @@ class Reviews extends React.Component {
         } else {
           this.state.renderLength += 30;
         }
-        this.renrender();
+        this.rerender();
       } else {
         if (reviews.length < this.state.renderLength + 30) {
           this.state.renderLength = reviews.length;
@@ -158,6 +160,7 @@ class Reviews extends React.Component {
       }
     }
     if (target === 'clearFilter') {
+      this.state.filteredReviews = [];
       this.state.renderLength = 12;
       this.state.filter = {
         bool: false,
@@ -189,6 +192,8 @@ class Reviews extends React.Component {
     const { reviews, filter } = this.state;
     this.state.filter.ratings[id] = clear;
     console.log(id);
+    this.state.filteredReviews = [];
+    this.state.renderLength = 12;
     if (!clear) {
       delete this.state.filter.ratings[id];
       if (!Object.keys(this.state.filter.ratings).length) {
@@ -197,8 +202,6 @@ class Reviews extends React.Component {
         return;
       }
     }
-    this.state.filteredReviews = [];
-    this.state.renderLength = 12;
     this.state.filter.bool = true;
     this.state.filter.length = 0;
     for (let i = 0; i < reviews.length; i += 1) {
@@ -216,6 +219,83 @@ class Reviews extends React.Component {
     } else {
       this.setState((prevState) => ({ renderedReviews: prevState.reviews.slice(0, this.state.renderLength) }));
     }
+  }
+
+  sortReviews(sortBy) {
+    this.state.sortBy = sortBy;
+    this.state.renderLength = 12;
+    switch (sortBy) {
+      case 'Most Helpful':
+        if (this.state.filter.bool) {
+          this.state.filteredReviews.sort((a, b) => {
+            const helpfulA = a.helpful.no / (a.helpful.yes + a.helpful.no);
+            const helpfulB = b.helpful.no / (b.helpful.yes + b.helpful.no);
+            if (helpfulA === helpfulB) {
+              return b.helpful.yes - a.helpful.yes;
+            }
+            return helpfulA - helpfulB;
+          });
+        } else {
+          this.state.reviews.sort((a, b) => {
+            const helpfulA = a.helpful.no / (a.helpful.yes + a.helpful.no);
+            const helpfulB = b.helpful.no / (b.helpful.yes + b.helpful.no);
+            if (helpfulA === helpfulB) {
+              return b.helpful.yes - a.helpful.yes;
+            }
+            return helpfulA - helpfulB;
+          });
+        }
+        break;
+      case 'Highest to Lowest Rating':
+        if (this.state.filter.bool) {
+          this.state.filteredReviews.sort((a, b) => {
+            if (a.rating === b.rating) {
+              return a.time - b.time;
+            }
+            return b.rating - a.rating;
+          });
+        } else {
+          this.state.reviews.sort((a, b) => {
+            if (a.rating === b.rating) {
+              return a.time - b.time;
+            }
+            return b.rating - a.rating;
+          });
+        }
+        break;
+      case 'Lowest to Highest Rating':
+        if (this.state.filter.bool) {
+          this.state.filteredReviews.sort((a, b) => {
+            if (a.rating === b.rating) {
+              return a.time - b.time;
+            }
+            return a.rating - b.rating;
+          });
+        } else {
+          this.state.reviews.sort((a, b) => {
+            if (a.rating === b.rating) {
+              return a.time - b.time;
+            }
+            return a.rating - b.rating;
+          });
+        }
+        break;
+      case 'Most Relevant':
+        if (this.state.filter.bool) {
+          this.state.filteredReviews.sort((a, b) => a.time - b.time);
+        } else {
+          this.state.reviews.sort((a, b) => a.time - b.time);
+        }
+        break;
+      default:
+        this.state.sortBy = 'Most Recent';
+        if (this.state.filter.bool) {
+          this.state.filteredReviews.sort((a, b) => a.time - b.time);
+        } else {
+          this.state.reviews.sort((a, b) => a.time - b.time);
+        }
+    }
+    this.rerender();
   }
 
   render() {
@@ -252,7 +332,7 @@ class Reviews extends React.Component {
             <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} filterReviews={this.filterReviews} />
             <AverageRatings overall={this.state.overall} />
           </div>
-          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} filterReviews={this.filterReviews} />
+          <ReviewsList reviews={renderedReviews} totalReviews={totalReviews} handleClick={this.handleClick} filter={this.state.filter} filterReviews={this.filterReviews} sortBy={this.state.sortBy} sortReviews={this.sortReviews} />
           <div ref={this.listRef} className="loadMore-container">
             {loadMore}
           </div>

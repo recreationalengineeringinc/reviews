@@ -9,10 +9,11 @@
   display: flex;
   justify-content: space-between;
   margin: 0 35px;
+  margin-bottom: -10px;
 }
 
 .reviewsList-header, .activeFilter-header {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .activeFilter-header {
@@ -23,7 +24,7 @@
   flex: 1;
   min-width: 200px;
   padding-left: 10px;
-  font-size: 14px;
+  font-size: 15.5px;
 }
 
 .user {
@@ -214,6 +215,14 @@ button:active, button:focus {
   font-size: 8px;
   width: 10px;
 }
+button.dropdown {
+  font-family: Graphik, sans-serif;
+  font-size: 16px;
+  border: 1px solid #fff;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
 
 .reviewSort:hover .dropdown {
   border: 1px dotted;
@@ -225,14 +234,14 @@ button:active, button:focus {
 
 .reviewSort:hover .dropdown-content, .transparent:hover .dropdown-content {
   display: block;
-  opacity: 1.0;
-  transition: opacity 0.7s ease-in-out;
+  opacity: 1;
+  transition: .5s;
 }
 
-.dropdown-content {
+.reviewSort .dropdown-content {
   display: none;
   opacity: 0;
-  transition: opacity 0.25s ease-in-out;
+  transition: all .5s;
   z-index: 2;
   position: absolute;
   background-color: #fff;
@@ -264,8 +273,9 @@ p {
   padding-right: 10px;
   padding-left: 10px;
   font-family: "Roboto","Helvetica Neue","Helvetica","Arial",sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
+
 #clearFilter:hover, .activeFilter:hover {
   cursor: pointer;
 }
@@ -286,7 +296,7 @@ p {
   margin-right: 4px;
 }
 
-/* .fade-in {
+.fade-in {
   animation: fadeIn ease 0.5s;
 }
 
@@ -297,4 +307,18 @@ p {
   100% {
     opacity:1;
   }
-} */
+}
+
+.fa-question-circle {
+  margin-left: auto;
+  margin-right: 15px;
+  margin-top: 3px;
+}
+
+.fa-question-circle:hover {
+  cursor: auto;
+}
+
+.reviewHeader-left {
+  margin-top: 3px;
+}

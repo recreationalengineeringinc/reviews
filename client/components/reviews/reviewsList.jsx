@@ -1,3 +1,5 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable max-len */
 /* eslint-disable object-curly-newline */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable function-paren-newline */
@@ -9,19 +11,20 @@ import ReviewComment from './reviewComment';
 import ActiveFilters from './activeFilters';
 import './reviewsList.css';
 
-const ReviewsList = ({ reviews, totalReviews, handleClick, filter, filterReviews }) => (
+const ReviewsList = ({ reviews, totalReviews, handleClick, filter, filterReviews, sortBy, sortReviews }) => (
   <div className="reviewsList-container">
     <div className="reviewsList-header">
-      <div>1–{reviews.length} of {filter.bool ? filter.length : totalReviews} Reviews</div>
+      <div className="reviewHeader-left">1–{reviews.length} of {filter.bool ? filter.length : totalReviews} Reviews</div>
+      {(sortBy === 'Most Relevant') ? <span className="fa fa-question-circle" aria-hidden="true" /> : null}
       <div className="reviewSort">
-        Sort by: <span className="dropdown">Most Recent</span><span className="dropArrow">▼</span>
+        Sort by: <button className="dropdown">{sortBy}</button><span className="dropArrow">▼</span>
         <div className="transparent" />
         <div className="dropdown-content">
-          <p>Most Relevant</p>
-          <p>Most Helpful</p>
-          <p>Highest to Lowest Rating</p>
-          <p>Lowest to Highest Rating</p>
-          <p>Most Recent</p>
+          <p onClick={() => sortReviews('Most Relevant')}>Most Relevant</p>
+          <p onClick={() => sortReviews('Most Helpful')}>Most Helpful</p>
+          <p onClick={() => sortReviews('Highest to Lowest Rating')}>Highest to Lowest Rating</p>
+          <p onClick={() => sortReviews('Lowest to Highest Rating')}>Lowest to Highest Rating</p>
+          <p onClick={() => sortReviews('Most Recent')}>Most Recent</p>
         </div>
       </div>
     </div>

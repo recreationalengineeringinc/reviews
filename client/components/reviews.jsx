@@ -43,7 +43,7 @@ class Reviews extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`${window.location.pathname}reviews`)
+    axios.get(`/api${window.location.pathname}reviews`)
       .then((results) => {
         const result = results.data;
         const reviews = [];

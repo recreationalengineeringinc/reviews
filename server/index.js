@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
+const morgan = require('morgan');
 const db = require('../db/connection.js');
 
 const app = express();
 const port = 3004;
 const publicDir = path.join(__dirname, '../public/');
+app.use(morgan('dev'));
+app.use('/api/product/:id/', express.static(publicDir));
 
-app.use('/product/:id', express.static(publicDir));
-
-app.get('/product/:id/reviews', (req, res) => {
+app.get('/api/product/:id/reviews', (req, res) => {
   db.connection.query(
     `SELECT products.*, reviews.*, users.name as username, users.location, users.total_reviews FROM reviews
     INNER JOIN products ON reviews.product_id=${req.params.id} AND reviews.product_id=products.id

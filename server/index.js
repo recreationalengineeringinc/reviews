@@ -8,7 +8,8 @@ const app = express();
 const port = 3004;
 const publicDir = path.join(__dirname, '../public/');
 app.use(morgan('dev'));
-app.use('*/product/:id/', express.static(publicDir));
+app.use('/reviews', express.static(publicDir));
+// app.use(express.static(publicDir));
 
 app.get('*/product/:id/reviews', (req, res) => {
   db.connection.query(

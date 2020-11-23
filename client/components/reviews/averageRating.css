@@ -19,6 +19,7 @@
   min-width: 325px;
   margin-bottom: 20px;
 }
+
 .starRating-container{
   display: flex;
   align-items: center;
@@ -49,6 +50,7 @@
   overflow: hidden;
   color: #2B6691;
 }
+
 .empty-stars:before, .full-stars:before {
   content:"\2605\2605\2605\2605\2605";
   font-size: 14pt;

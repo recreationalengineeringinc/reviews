@@ -55,8 +55,8 @@ const ReviewComment = ({ comment, handleClick }) => {
   } else {
     helpful = (
       <div className="helpfulButtons">
-        <button id="yes" className="commentButton" onClick={(e) => handleClick(e, comment)}>Yes·{comment.helpful.yes}</button>
-        <button id="no" className="commentButton" onClick={(e) => handleClick(e, comment)}>No·{comment.helpful.no}</button>
+        <button id="yes" className="commentButton review-button" onClick={(e) => handleClick(e, comment)}>Yes·{comment.helpful.yes}</button>
+        <button id="no" className="commentButton review-button" onClick={(e) => handleClick(e, comment)}>No·{comment.helpful.no}</button>
       </div>
     );
   }
@@ -65,7 +65,7 @@ const ReviewComment = ({ comment, handleClick }) => {
   if (comment.reported) {
     reported = <span id="report">Reported</span>;
   } else {
-    reported = <button id="report" className="commentButton" onClick={(e) => handleClick(e, comment)}>Report as inappropriate</button>;
+    reported = <button id="report" className="commentButton review-button" onClick={(e) => handleClick(e, comment)}>Report as inappropriate</button>;
   }
 
   return (

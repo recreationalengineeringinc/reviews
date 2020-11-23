@@ -13,7 +13,7 @@ const ActiveFilters = ({ filter, handleClick, filterReviews }) => {
         {Object.keys(filter.ratings).map((key) =>
           <ActiveFilterButtons key={key} clearId={key} filterReviews={filterReviews} />,
         )}
-        <button id="clearFilter" type="button" onClick={(e) => handleClick(e, null, 'clearFilter')}>
+        <button className="review-button" id="clearFilter" type="button" onClick={(e) => handleClick(e, null, 'clearFilter')}>
           Clear All <i className="fa fa-times-circle" />
         </button>
       </div>

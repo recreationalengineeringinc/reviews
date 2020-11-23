@@ -305,14 +305,14 @@ class Reviews extends React.Component {
     if (this.state.filter.bool) {
       if (this.state.renderLength < this.state.filteredReviews.length) {
         loadMore = (
-          <button id="loadMore" type="button" onClick={this.handleClick}>
+          <button className="review-button" id="loadMore" type="button" onClick={this.handleClick}>
             Load more
           </button>
         );
       }
     } else if (this.state.renderLength < totalReviews) {
       loadMore = (
-        <button id="loadMore" type="button" onClick={this.handleClick}>
+        <button className="review-button" id="loadMore" type="button" onClick={this.handleClick}>
           Load more
         </button>
       );
@@ -326,7 +326,7 @@ class Reviews extends React.Component {
         <div>
           <h2 id="reviewsHeader">Reviews</h2>
           <div>
-            <button id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
+            <button className="review-button" id="writeReview" type="button" onClick={this.handleClick}>Write a review</button>
           </div>
           <div className="overallRatingContainer">
             <RatingSnapshot reviewsCount={this.state.reviewsCount} totalReviews={totalReviews} filterReviews={this.filterReviews} />

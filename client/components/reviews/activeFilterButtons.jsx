@@ -5,7 +5,7 @@
 import React from 'react';
 
 const ActiveFilterButton = (props) => (
-  <button type="button" className="activeFilter" onClick={(e) => props.filterReviews(e, props.clearId, false)}>
+  <button type="button" className="activeFilter review-button" onClick={(e) => props.filterReviews(e, props.clearId, false)}>
     {props.clearId} stars <i className="fa fa-times-circle" />
   </button>
 );

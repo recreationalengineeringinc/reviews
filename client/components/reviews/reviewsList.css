@@ -192,15 +192,6 @@ li {
   font-weight: 550;
 }
 
-button {
-  font-size: 13px;
-  color: #2E2E2E;
-  background-color: #fff;
-  border: 1px solid #C5C5C5;
-  border-radius: 2px;
-  padding: 7px 10px;
-}
-
 button.commentButton:hover {
   cursor: pointer;
   box-shadow: inset 0px 0px 2px 2px #e2e2e2af;
@@ -215,6 +206,7 @@ button:active, button:focus {
   font-size: 8px;
   width: 10px;
 }
+
 button.dropdown {
   font-family: Graphik, sans-serif;
   font-size: 16px;
@@ -263,6 +255,7 @@ p {
   color: #fff;
   cursor: pointer;
 }
+
 .activeFilter-container {
   margin-left: 35px;
 }
@@ -276,11 +269,11 @@ p {
   font-size: 16px;
 }
 
-#clearFilter:hover, .activeFilter:hover {
+ #clearFilter:hover, .activeFilter:hover {
   cursor: pointer;
 }
 
-#clearFilter {
+ #clearFilter {
   background-color: transparent;
   color: #292929;
   border: 1px solid #b8b8b8;

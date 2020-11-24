@@ -24,6 +24,6 @@ coverage
 build/
 dist/
 
-bundle.js
-
 userInfo.js
+
+*.pem

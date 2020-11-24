@@ -1,0 +1,1 @@
+ssh -i "/Users/victor/Documents/hrsf131/rei-reviews/fec-reireviews.pem" ubuntu@ec2-54-219-168-121.us-west-1.compute.amazonaws.com

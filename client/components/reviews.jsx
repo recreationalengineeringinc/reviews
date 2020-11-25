@@ -342,7 +342,7 @@ class Reviews extends React.Component {
       reviewApp = (
         <div className="firstReview">
           <h2 id="reviewsHeader">Reviews</h2>
-          <div className="empty-stars starRating" />
+          <div className="review-empty-stars starRating" />
           <div className="firstReviewComment">Be the first to review this product</div>
         </div>
       );

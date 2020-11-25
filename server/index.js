@@ -47,5 +47,5 @@ app.get('*/product/:id/*reviews', (req, res) => {
 // });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}/product/1/`);
+  console.log(`Example app listening at http://localhost:${port}/product/1/review/`);
 });

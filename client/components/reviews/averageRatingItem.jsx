@@ -10,8 +10,8 @@ const AverageRatingItem = ({ category, rating, total = 1 }) => {
       <div className="starRating-container">
         <div className="starRatingTitle">Overall</div>
         <div className="starRating">
-          <div className="empty-stars" />
-          <div className="full-stars" style={{ width: `${((rating / total) / 5) * 100}%` }} />
+          <div className="review-empty-stars" />
+          <div className="review-full-stars" style={{ width: `${((rating / total) / 5) * 100}%` }} />
         </div>
         <div className="overallRatingScore">
           {(rating / total).toFixed(1)}

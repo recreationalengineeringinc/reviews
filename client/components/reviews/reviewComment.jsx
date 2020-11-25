@@ -82,8 +82,8 @@ const ReviewComment = ({ comment, handleClick }) => {
         <div className="review-text-header">
           <div className="commentRating">
             <div className="starRating">
-              <div className="empty-stars" />
-              <div className="full-stars" style={{ width: `${(comment.rating / 5) * 100}%` }} />
+              <div className="review-empty-stars" />
+              <div className="review-full-stars" style={{ width: `${(comment.rating / 5) * 100}%` }} />
             </div>
             <div className="reviewTime">{` · ${time}`}</div>
           </div>

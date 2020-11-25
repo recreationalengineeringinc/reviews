@@ -42,7 +42,7 @@
   margin-right: 4px;
 }
 
-.full-stars {
+.review-full-stars {
   position: absolute;
   left: 0;
   top: 0;
@@ -51,7 +51,7 @@
   color: #2B6691;
 }
 
-.empty-stars:before, .full-stars:before {
+.review-empty-stars:before, .review-full-stars:before {
   content:"\2605\2605\2605\2605\2605";
   font-size: 14pt;
 }

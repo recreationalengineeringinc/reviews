@@ -19,12 +19,14 @@ const ReviewsList = ({ reviews, totalReviews, handleClick, filter, filterReviews
       <div className="reviewSort">
         Sort by: <button className="dropdown">{sortBy}</button><span className="dropArrow">▼</span>
         <div className="transparent" />
-        <div className="dropdown-content">
-          <p onClick={() => sortReviews('Most Relevant')}>Most Relevant</p>
-          <p onClick={() => sortReviews('Most Helpful')}>Most Helpful</p>
-          <p onClick={() => sortReviews('Highest to Lowest Rating')}>Highest to Lowest Rating</p>
-          <p onClick={() => sortReviews('Lowest to Highest Rating')}>Lowest to Highest Rating</p>
-          <p onClick={() => sortReviews('Most Recent')}>Most Recent</p>
+        <div className="dropdown-container">
+          <div className="dropdown-content">
+            <p onClick={() => sortReviews('Most Relevant')}>Most Relevant</p>
+            <p onClick={() => sortReviews('Most Helpful')}>Most Helpful</p>
+            <p onClick={() => sortReviews('Highest to Lowest Rating')}>Highest to Lowest Rating</p>
+            <p onClick={() => sortReviews('Lowest to Highest Rating')}>Lowest to Highest Rating</p>
+            <p onClick={() => sortReviews('Most Recent')}>Most Recent</p>
+          </div>
         </div>
       </div>
     </div>

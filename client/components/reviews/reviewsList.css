@@ -227,6 +227,7 @@ button.dropdown {
 .dropdown-container {
   position: absolute;
   z-index: 2;
+  right: 90px;
 }
 
 .reviewSort:hover .dropdown-content, .transparent:hover .dropdown-content {
@@ -245,8 +246,6 @@ button.dropdown {
   border-radius: 5px;
   width: 250px;
   overflow: hidden;
-  position: relative;
-  left: -70px;
 }
 
 p {

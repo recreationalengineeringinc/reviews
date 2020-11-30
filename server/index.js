@@ -2,12 +2,16 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const compression = require('compression');
+
 const db = require('../db/connection.js');
 
 const app = express();
 const port = 3004;
 const publicDir = path.join(__dirname, '../public/');
 app.use(morgan('dev'));
+app.use(compression());
+
 app.use('*/review', express.static(publicDir));
 
 app.get('*/product/:id/*reviews', (req, res) => {

@@ -4,7 +4,7 @@ const CLIENT_DIR = path.join(__dirname, '/client');
 const PUBLIC_DIR = path.join(__dirname, '/public');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: `${CLIENT_DIR}/index.jsx`,
   output: {
     path: PUBLIC_DIR,
@@ -41,6 +41,6 @@ module.exports = {
   },
   watch: true,
   optimization: {
-    minimize: false,
+    minimize: true,
   },
 };

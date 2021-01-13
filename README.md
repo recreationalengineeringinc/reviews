@@ -2,7 +2,7 @@
 #### Frontend Developer: Victor Wong
 
 > Reviews component for retail product web app
-<div align="center">
+<div>
   <img src="https://media.giphy.com/media/7X85NalRLA0eb3CwFo/giphy.gif" />
 </div>
 

@@ -3,7 +3,7 @@
 
 > Reviews component for retail product web app
 <div align="center">
-  <img src="https://media.giphy.com/media/7X85NalRLA0eb3CwFo/source.mp4" />
+  <img src="https://media.giphy.com/media/7X85NalRLA0eb3CwFo/giphy.gif" />
 </div>
 
 

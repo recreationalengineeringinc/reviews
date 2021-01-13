@@ -1,10 +1,12 @@
-# Project Name
+# Recreational Engineering Inc. - Frontend
+#### Frontend Developer: Victor Wong
 
-> Project description
+> Reviews component for retail product web app
+<iframe src="https://giphy.com/embed/7X85NalRLA0eb3CwFo" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/preview-7X85NalRLA0eb3CwFo">via GIPHY</a></p>
+
 
 ## Related Projects
 
-  - https://github.com/recreationalengineeringinc/reviews
   - https://github.com/recreationalengineeringinc/cart
   - https://github.com/recreationalengineeringinc/carousel
   - https://github.com/recreationalengineeringinc/image-display
@@ -17,14 +19,17 @@
 
 ## Usage
 
-> Some usage instructions
+- Access the individual component through http://18.217.62.125:3004/product/5/review/
+- Access the site in whole through http://3.20.233.115:3000/userid/1/product/5/
+- Change user/product by modifying the numerical value after userid & product respectively 
+  e.g. from http://3.20.233.115:3000/userid/1/5/ to http://3.20.233.115:3000/userid/2/10/
+  changed from user 1 to 2 and product 5 to 10.
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
 
 ## Development
 
@@ -33,7 +38,8 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
+npm run seed
+npm run webpack
+npm start
 ```
-

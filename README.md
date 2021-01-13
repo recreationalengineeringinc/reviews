@@ -2,7 +2,9 @@
 #### Frontend Developer: Victor Wong
 
 > Reviews component for retail product web app
+<div>
 <iframe src="https://giphy.com/embed/7X85NalRLA0eb3CwFo" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/preview-7X85NalRLA0eb3CwFo">via GIPHY</a></p>
+</div>
 
 
 ## Related Projects
